@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const posts = await getCollection("blog");
   return rss({
+    stylesheet: '/rss/styles.xsl',
     title: 'Blogxyz Content Collection | Blog',
     description: 'My journey learning build a blog website with Astro',
     site: context.site,
