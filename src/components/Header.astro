@@ -1,0 +1,297 @@
+---
+import "../styles/global.css";
+---
+
+<header id="header" class="header">
+    <nav class="wrapper-contents nav">
+        <a href="/" class="logo">Blogxyz</a>
+        <menu class="nav__menu">
+            <li><a href="/" class="nav__link" data-navLink>Home</a></li>
+            <li><a href="/about/" class="nav__link" data-navLink>About</a></li>
+            <li><a href="/blog/" class="nav__link" data-navLink>Blog</a></li>
+        </menu>
+
+        <div id="themeToggle">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path></svg
+            >
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><circle cx="12" cy="12" r="5"></circle><line
+                    x1="12"
+                    y1="1"
+                    x2="12"
+                    y2="3"></line><line x1="12" y1="21" x2="12" y2="23"
+                ></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"
+                ></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"
+                ></line><line x1="1" y1="12" x2="3" y2="12"></line><line
+                    x1="21"
+                    y1="12"
+                    x2="23"
+                    y2="12"></line><line
+                    x1="4.22"
+                    y1="19.78"
+                    x2="5.64"
+                    y2="18.36"></line><line
+                    x1="18.36"
+                    y1="5.64"
+                    x2="19.78"
+                    y2="4.22"></line></svg
+            >
+        </div>
+        <div class="nav__mobile-btn">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                width="26px"
+                height="26px"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+            >
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM7 12C7 11.4477 7.44772 11 8 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H8C7.44772 13 7 12.5523 7 12ZM13 18C13 17.4477 13.4477 17 14 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H14C13.4477 19 13 18.5523 13 18Z"
+                    fill="currentColor"></path>
+            </svg>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+            >
+                <path
+                    d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z"
+                    fill="currentColor"></path>
+            </svg>
+        </div>
+    </nav>
+</header>
+
+<style>
+    .header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 888;
+        backdrop-filter: blur(var(--size-2-base));
+        isolation: isolate;
+    }
+
+    .nav {
+        height: var(--clamp-navbar);
+        padding-block: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav__menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: clamp(0rem, 5vw, var(--size-5-base));
+    }
+
+    .nav__link {
+        padding-bottom: 0.5em;
+        border-bottom: var(--size-xx-small) solid transparent;
+        font-weight: var(--fw-regular);
+        transition: var(--transition);
+    }
+
+    .nav__link:is(:hover, :focus-visible) {
+        border-bottom-color: var(--blue-700);
+    }
+
+    .nav__link[aria-current="page"] {
+        font-weight: var(--fw-medium);
+        border-bottom-color: var(--blue-700);
+    }
+
+    #themeToggle {
+        border: 0;
+        background: none;
+        padding: 1em;
+        cursor: pointer;
+    }
+
+    #themeToggle svg:first-child {
+        display: block;
+    }
+
+    #themeToggle svg:last-child {
+        display: none;
+    }
+
+    :global(.darkmode) #themeToggle svg:first-child {
+        display: none;
+    }
+
+    :global(.darkmode) #themeToggle svg:last-child {
+        display: block;
+    }
+
+    .nav__mobile-btn {
+        display: none;
+        cursor: pointer;
+    }
+
+    .nav__mobile-btn svg path {
+        fill: var(--light-base);
+    }
+
+    /* 700px  */
+    @media (max-width: 43.75em) {
+        #themeToggle {
+            margin-inline: auto 0.5em;
+        }
+
+        .nav__mobile-btn {
+            display: block;
+            background-color: var(--accent-color-1);
+            padding: var(--size-xx-small);
+            border-radius: var(--size-xx-small);
+            width: var(--size-3-xl);
+            height: var(--size-3-xl);
+            display: grid;
+            place-items: center;
+        }
+
+        .nav__mobile-btn svg:first-child {
+            display: block;
+        }
+
+        .nav__mobile-btn svg:last-child {
+            display: none;
+        }
+
+        .nav__menu {
+            position: fixed;
+            width: 90%;
+            top: var(--clamp-navbar);
+            right: 0;
+            margin-inline: 0;
+            flex-direction: column;
+            justify-content: start;
+            gap: var(--clamp-5-base);
+            transition: var(--transition);
+            background-color: var(--accent-color-1);
+            z-index: -1;
+            max-height: 0;
+            min-height: 0;
+            padding-block: 0;
+            visibility: hidden;
+        }
+
+        .nav__menu.active {
+            /* max-height: 43.75rem; */
+            min-height: 90dvh;
+            padding-block: var(--clamp-5-base);
+            visibility: visible;
+        }
+
+        .nav__menu.active ~ .nav__mobile-btn svg:first-child {
+            display: none;
+        }
+
+        .nav__menu.active ~ .nav__mobile-btn svg:last-child {
+            display: block;
+        }
+
+        .nav__menu li {
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav__link {
+            display: inline-block;
+            opacity: 0;
+            font-size: var(--size-1-xl);
+            font-weight: var(--fw-medium);
+            color: var(--light-base);
+            text-align: center;
+        }
+
+        .nav__link:is(:hover, :focus-visible) {
+            color: var(--dark-base);
+        }
+
+        .nav__menu.active .nav__link {
+            opacity: 1;
+        }
+    }
+</style>
+
+<script is:inline>
+// Darkmode
+let darkmode = localStorage.getItem("darkmode");
+const themeToggle = document.getElementById("themeToggle");
+
+const enableDarkmode = () => {
+    document.body.classList.add("darkmode");
+    localStorage.setItem("darkmode", "active");
+};
+
+const disableDarkmode = () => {
+    document.body.classList.remove("darkmode");
+    localStorage.setItem("darkmode", null);
+};
+
+if (darkmode === "active") enableDarkmode();
+
+themeToggle.addEventListener("click", () => {
+    darkmode = localStorage.getItem("darkmode");
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+});
+
+// Mobile Navigation
+const menuBtn = document.querySelector(".nav__mobile-btn");
+const navMenu = document.querySelector(".nav__menu");
+
+menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+});
+
+navMenu.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+});
+
+document.addEventListener("click", (e) => {
+    if (!menuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+        menuBtn.classList.remove("active");
+        navMenu.classList.remove("active");
+    }
+});
+
+// Active Link Navbar In Current Page
+const navLinks = document.querySelectorAll("[data-navLink]");
+
+navLinks.forEach((link) => {
+    if (link.getAttribute("href") === window.location.pathname) {
+        link.setAttribute("aria-current", "page");
+    }
+});
+</script>

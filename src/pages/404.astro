@@ -1,0 +1,18 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import "../styles/global.css";
+---
+
+<MainLayout title="Page Not Found">
+    <section aria-labelledby="pageNotFound">
+        <div class="wrapper-contents pageNotFound grid-center gap-4">
+            <h1 id="pageNotFound" class="text-center h2">
+                Page Not Found <br />Seem to have misplaced something…
+            </h1>
+            <div class="btn-group">
+                <a href="/" class="btn btn-primary">Back to home</a>
+                <a href="/blog/" class="btn">Back to blog</a>
+            </div>
+        </div>
+    </section>
+</MainLayout>

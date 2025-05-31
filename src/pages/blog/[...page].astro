@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
+import CategoryPosts from "../../components/CategoryPosts.astro";
+
+import "../../styles/blog.css";
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getCollection("blog");
+    allPosts.sort(
+        (a, b) =>
+            new Date(b.data.pubDate).valueOf() -
+            new Date(a.data.pubDate).valueOf(),
+    );
+    return paginate(allPosts, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
+---
+
+<MainLayout title="Blogxyz Content Collections">
+    <section aria-labelledby="titleBlog">
+        <div class="wrapper-contents blog">
+            <h1 id="titleBlog">Blogxyz Content Collections</h1>
+            <p class="h4 blog__sub-title">
+                Learn from Music Producers and Enthusiasts
+            </p>
+        </div>
+    </section>
+    <section aria-labelledby="postsLatest">
+        <div class="wrapper-contents posts__resent">
+            <h2 id="postsLatest">Latest Blog Posts</h2>
+            <div class="posts__wrapper">
+                <article class="posts__content">
+                    <ul class="posts__list">
+                        {
+                            page.data.map((post: any) => (
+                                <BlogPostCard
+                                    url={`/posts/${post.id}/`}
+                                    tags={post.data.tags}
+                                    image={post.data.image}
+                                    imageAlt={post.data.imageAlt}
+                                    title={post.data.title}
+                                    pubDate={post.data.pubDate}
+                                    author={post.data.author}
+                                    description={post.data.description}
+                                />
+                            ))
+                        }
+                    </ul>
+                </article>
+                <aside class="posts__sidebar">
+                    <CategoryPosts />
+                </aside>
+            </div>
+            <nav class="pagination" aria-label="blog-pagination">
+                <a class="btn prev" href={page.url.prev || "#"}
+                    ><span class="icon" aria-hidden="true">«</span> Prev</a
+                >
+                 |
+                <a class="btn next" href={page.url.next || "#"}
+                    >Next <span class="icon" aria-hidden="true">»</span></a
+                >
+            </nav>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--clamp-2-base);
+    }
+
+    .icon {
+        font-size: var(--clamp-2-base);
+    }
+</style>

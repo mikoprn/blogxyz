@@ -1,0 +1,22 @@
+---
+import FormattedDate from '../components/FormattedDate.astro';
+import { Image } from "astro:assets";
+
+const { title, url, tags, image, imageAlt, pubDate, author, description } = Astro.props
+---
+
+<li class="post__card">
+    <a href={`/tags/${tags}`} class="btn tag">{tags}</a>
+    <a href={url}>
+        <Image src={image} alt={imageAlt} width="400" height="250" />
+    </a>
+    <a href={url} class="h6">
+        {title}
+    </a>
+    <div class="post__detail">
+        <small><FormattedDate date={pubDate} /></small>
+        <a href={url} class="post__author text-small">{author}</a>
+    </div>
+    <p class="post__description">{description}</p>
+    <a href={url} class="btn btn-primary post__btn"> Read post</a>
+</li>

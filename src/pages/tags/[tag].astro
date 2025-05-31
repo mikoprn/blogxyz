@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
+import "../../styles/blog.css";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  allPosts.sort(
+    (a, b) =>
+      new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+  );
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<MainLayout title={tag}>
+  <section aria-labelledby="titleTags">
+    <div class="wrapper-contents tags">
+      <h2 id="titleTags">
+        Posts tagged with category <span class="tags__category">{tag}</span>
+      </h2>
+      <ul class="posts__list posts__cards-large">
+        {
+          posts.map((post: any) => (
+            <BlogPostCard
+              url={`/posts/${post.id}/`}
+              tags={post.data.tags}
+              image={post.data.image}
+              imageAlt={post.data.imageAlt}
+              title={post.data.title}
+              pubDate={post.data.pubDate}
+              author={post.data.author}
+              description={post.data.description}
+            />
+          ))
+        }
+      </ul>
+      <div class="post__back-btn">
+        <a href="/blog/" class="btn"
+          ><span class="icon" aria-hidden="true">«</span>Back to blog
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .tags {
+    display: grid;
+    place-items: center;
+    gap: var(--clamp-5-base);
+  }
+  .post__back-btn {
+    justify-self: start;
+  }
+
+  .post__back-btn .icon {
+    font-size: var(--clamp-2-base);
+    line-height: normal;
+    margin-right: var(--clamp-x-small);
+  }
+
+  .tags__category {
+    text-transform: capitalize;
+    padding-bottom: var(--size-xx-small);
+    border-bottom: var(--size-xx-small) solid var(--blue-700);
+  }
+
+  .tags__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--clamp-5-base) var(--clamp-3-base);
+  }
+</style>

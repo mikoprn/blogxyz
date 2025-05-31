@@ -1,0 +1,101 @@
+---
+import MainLayout from "./MainLayout.astro";
+import CategoryPosts from "../components/CategoryPosts.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import BlogPostPrevNext from "../components/BlogPostPrevNext.astro";
+import { Image } from "astro:assets";
+import "../styles/blog.css";
+
+const { frontmatter, post, allPosts } = Astro.props;
+const { title, tags, image, imageAlt, pubDate, author } = frontmatter;
+---
+
+<MainLayout title={title}>
+    <section aria-labelledby="postTitle">
+        <div class="wrapper-contents post__layout">
+            <div class="tags">
+                {
+                    tags.map((tag: string) => (
+                        <a href={`/tags/${tag}`} class="btn tag text-small">
+                            {tag}
+                        </a>
+                    ))
+                }
+            </div>
+            <Image src={image} alt={imageAlt} width="500" height="320" />
+            <h1 id="postTitle">{title}</h1>
+            <div class="post__detail">
+                <p>Publised : <FormattedDate date={pubDate} /></p>
+                <p>
+                    Written by : <span class="post__author">{author}</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <article>
+        <div class="wrapper-contents post__wrapper">
+            <article class="post__article">
+                <slot />
+            </article>
+            <aside class="posts__sidebar">
+                <CategoryPosts />
+            </aside>
+        </div>
+    </article>
+    <article>
+        <div class="wrapper-contents post__prev-next">
+            <BlogPostPrevNext />
+            <div class="post__back-btn">
+                <a href="/blog/" class="btn"
+                    ><span class="icon" aria-hidden="true">«</span>Back to blog
+                </a>
+            </div>
+        </div>
+    </article>
+</MainLayout>
+<style>
+    .post__layout {
+        display: grid;
+        place-items: center;
+        gap: var(--clamp-3-base);
+        padding-bottom: 0;
+    }
+
+    .post__back-btn .icon {
+        font-size: var(--clamp-2-base);
+        line-height: normal;
+        margin-right: var(--clamp-x-small);
+    }
+
+    .post__detail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: var(--clamp-base);
+    }
+
+    .post__wrapper {
+        display: flex;
+        gap: var(--clamp-5-base);
+    }
+
+    .post__article {
+        flex: 3;
+        display: grid;
+        gap: var(--clamp-base);
+    }
+
+    .post__prev-next {
+        padding-top: 0;
+        display: grid;
+        gap: var(--clamp-5-base);
+    }
+
+    /* 768px */
+    @media (max-width: 48em) {
+        .post__wrapper {
+            flex-direction: column;
+        }
+    }
+</style>

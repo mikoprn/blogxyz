@@ -1,0 +1,101 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import "../styles/global.css";
+
+const identity = {
+    firstName: "James",
+    country: "Canada",
+    occupation: "Technical Writer",
+    hobbies: ["Music", "photography", "birdwatching", "baseball"],
+};
+
+const skills = [
+    "Music Producers ",
+    "Photography",
+    "Videography",
+    "Event Organizer",
+    "Writer BLogs",
+];
+---
+
+<MainLayout title="About Rhythm Nation">
+    <section aria-labelledby="titleAbout">
+        <div class="wrapper-contents about">
+            <article class="about__title">
+                <h1 id="titleAbout">About Blogxyz</h1>
+                <p class="h4">Learn from Music Producers and Enthusiasts</p>
+            </article>
+            <div class="about__content">
+                <h2 class="h4 about__content-title">
+                    Here are a few facts about me:
+                </h2>
+                <ul>
+                    <li>
+                        <p>
+                            My name is {identity.firstName}.
+                            <br />
+                             I live in {identity.country} and I work as a {
+                                identity.occupation
+                            }.
+                        </p>
+                    </li>
+                    {
+                        identity.hobbies.length >= 2 && (
+                            <li>
+                                <p>
+                                    Two of my hobbies are: {identity.hobbies[0]}{" "}
+                                    and {identity.hobbies[1]}
+                                </p>
+                            </li>
+                        )
+                    }
+                </ul>
+                <h3 class="h4 about__content-title">
+                    My skills, knowledge, and experience are :
+                </h3>
+                <ul class="about__skill">
+                    {
+                        skills.map((skill) => (
+                            <li>
+                                <p>{skill}</p>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .about {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        gap: var(--clamp-5-base);
+    }
+
+    .about__title {
+        display: grid;
+        gap: var(--clamp-2-base);
+        text-align: center;
+    }
+
+    .about__content {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        gap: var(--clamp-base);
+    }
+
+    .about__content-title:not(:first-child) {
+        margin-top: var(--clamp-3-base);
+    }
+
+    .about__skill {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--clamp-2-base);
+    }
+</style>
