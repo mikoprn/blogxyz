@@ -1,3 +1,9 @@
+# Create Blog Website With Astro JS Version 5 With Content Collection.
+
+![blogxyz](https://github.com/user-attachments/assets/713f2a18-ca33-418b-b782-f83a29f1556d)
+
+---------------------------------------------
+
 # Astro Starter Kit: Basics
 
 ```sh

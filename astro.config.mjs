@@ -9,6 +9,6 @@ export default defineConfig({
   service: passthroughImageService(),
   domains: ["astro.build"],
 },
-  site: "https://blogxyz-phi.vercel.app/",
+  site: "https://blogxyz-astro.vercel.app/",
   integrations: [sitemap()],
 });
